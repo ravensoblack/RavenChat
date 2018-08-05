@@ -39,4 +39,4 @@ Thumbs.db
 
 *.wav
 *.png
-obj/Debug/
+RazorChat/obj/Debug/
