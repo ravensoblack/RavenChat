@@ -214,5 +214,14 @@ namespace RazorChat.Properties {
                 this["ExternalPageOptions"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("v0.1a")]
+        public string AboutVersion {
+            get {
+                return ((string)(this["AboutVersion"]));
+            }
+        }
     }
 }

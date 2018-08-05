@@ -35,12 +35,13 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.labelAboutVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 72);
+            this.label1.Location = new System.Drawing.Point(61, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 13);
             this.label1.TabIndex = 0;
@@ -49,7 +50,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(170, 72);
+            this.linkLabel1.Location = new System.Drawing.Point(170, 106);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(39, 13);
             this.linkLabel1.TabIndex = 1;
@@ -59,7 +60,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(99, 99);
+            this.buttonOK.Location = new System.Drawing.Point(99, 133);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
@@ -70,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 52);
+            this.label2.Location = new System.Drawing.Point(19, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(157, 13);
             this.label2.TabIndex = 3;
@@ -79,7 +80,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(218, 52);
+            this.linkLabel2.Location = new System.Drawing.Point(218, 86);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(44, 13);
             this.linkLabel2.TabIndex = 4;
@@ -99,7 +100,7 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(173, 52);
+            this.linkLabel3.Location = new System.Drawing.Point(173, 86);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(46, 13);
             this.linkLabel3.TabIndex = 6;
@@ -107,11 +108,21 @@
             this.linkLabel3.Text = "Website";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
+            // labelAboutVersion
+            // 
+            this.labelAboutVersion.AutoSize = true;
+            this.labelAboutVersion.Location = new System.Drawing.Point(119, 36);
+            this.labelAboutVersion.Name = "labelAboutVersion";
+            this.labelAboutVersion.Size = new System.Drawing.Size(13, 13);
+            this.labelAboutVersion.TabIndex = 7;
+            this.labelAboutVersion.Text = "v";
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 132);
+            this.ClientSize = new System.Drawing.Size(280, 183);
+            this.Controls.Add(this.labelAboutVersion);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.linkLabel2);
@@ -136,5 +147,6 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.Label labelAboutVersion;
     }
 }

@@ -24,7 +24,7 @@ namespace RazorChat
 
         private void About_Load(object sender, EventArgs e)
         {
-
+            labelAboutVersion.Text = Properties.Settings.Default.AboutVersion;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
