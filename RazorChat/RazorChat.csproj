@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A282C5CB-8448-47C2-A56A-E74389EEF645}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RazorChat</RootNamespace>
+    <AssemblyName>RazorChat</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainSettings.Designer.cs">
+      <DependentUpon>MainSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RazorChatDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RazorChatDebug.Designer.cs">
+      <DependentUpon>RazorChatDebug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RazorPage.Designer.cs">
+      <DependentUpon>RazorPage.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainSettings.resx">
+      <DependentUpon>MainSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RazorChatDebug.resx">
+      <DependentUpon>RazorChatDebug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RazorPage.resx">
+      <DependentUpon>RazorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConnectButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-disconnected-nolan-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-connected-nolan-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-settings-nolan-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-bug-nolan-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gray-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-eye-win10-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-invisible-win10-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\black-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Default SBBS syspage.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Confused Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Crying Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Disappointed Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face Screaming in Fear.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face Throwing a Kiss.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Face With Tears of Joy.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flushed Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Heavy Black Heart.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kiss Mark.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Neutral Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OK Hand Sign.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pile of Poo.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pouting Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Smiling Face With Heart-Shaped Eyes.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Smiling Face With Open Mouth and Smiling Eyes.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Smiling Face With Open Mouth.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Smirking Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thumbs Up Sign.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unamused Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Winking Face.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-play-win10-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-info-win10-50.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
