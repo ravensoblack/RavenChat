@@ -173,6 +173,7 @@
             // backgroundWorkerReceive
             // 
             this.backgroundWorkerReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerReceive_DoWork);
+            this.backgroundWorkerReceive.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerReceive_ProgressChanged);
             this.backgroundWorkerReceive.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerReceive_RunWorkerCompleted);
             // 
             // backgroundWorkerSend

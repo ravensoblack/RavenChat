@@ -101,6 +101,7 @@ namespace RazorChat
                             STW.AutoFlush = true;
                             backgroundWorkerReceive.RunWorkerAsync();
                             backgroundWorkerSend.WorkerSupportsCancellation = true;
+                            backgroundWorkerReceive.WorkerReportsProgress = true;
                             timerGetStatus.Start();
                         }
 
@@ -278,24 +279,24 @@ namespace RazorChat
                     {
                         case "0":
                             btnNode[0].Image = Properties.Resources.green_circle;
-                            this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
-                            {
+                            //this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
+                            //{
                                 btnNode[0].ForeColor = Color.Black;
-                            }));
+                            //}));
                             break;
                         case "1":
                             btnNode[0].Image = Properties.Resources.yellow_circle;
-                            this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
-                            {
+                            //this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
+                            //{
                                 btnNode[0].ForeColor = Color.Black;
-                            }));
+                            //}));
                             break;
                         case "3":
                             btnNode[0].Image = Properties.Resources.yellow_circle;
-                            this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
-                            {
+                            //this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
+                            //{
                                 btnNode[0].ForeColor = Color.Black;
-                            }));
+                            //}));
                             break;
                         default:
                             btnNode[0].Image = Properties.Resources.red_circle;
@@ -305,14 +306,14 @@ namespace RazorChat
                 if (status[i].useron != prevstatus[i].useron||status[i].nodestatusdescription!=prevstatus[i].nodestatusdescription)
                 {
                     Label nodelabel = this.Controls.Find("nodelabel" + i, true).FirstOrDefault() as Label;
-                    this.Invoke(new MethodInvoker(delegate ()
-                    {
+                    //this.Invoke(new MethodInvoker(delegate ()
+                    //{
                         if(status[i].useron!="")
                         {
                             nodelabel.Text = status[i].useron + " ";
                         }
                         nodelabel.Text += status[i].nodestatusdescription;
-                    }));
+                    //}));
                 }
             }
             Properties.Settings.Default.NumberOfNodes = nodestrings.Length;
@@ -426,7 +427,7 @@ namespace RazorChat
             string nodepagedstring = nodepaged.ToString();
             var toolstrip1Items = toolStripNodes as ToolStrip;
             var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepagedstring, true);
-            if(btnNode[0].Image != Properties.Resources.blue_circle)
+            /*if(btnNode[0].Image != Properties.Resources.blue_circle)
             {
                 btnNode[0].Image = Properties.Resources.blue_circle;
                 //btnNode[0].Tag = "Blue";
@@ -437,10 +438,10 @@ namespace RazorChat
                 btnNode[0].Image = Properties.Resources.yellow_circle;
                 //btnNode[0].Tag = "Yellow";
                 //MessageBox.Show(nodepaged + ": Yellow");
-            }
+            }*/
 
-            //btnNode[0].Image = Properties.Resources.blue_circle;
-            //timerFlashnodes[nodepaged].Start();
+            btnNode[0].Image = Properties.Resources.blue_circle;
+            timerFlashnodes[nodepaged].Start();
         }
 
         private void StopFlashNode(int nodeclicked)
@@ -536,15 +537,26 @@ namespace RazorChat
                 // receives data
                 try
                 {
-                    receive = STR.ReadLine();
-                    e.Result = receive;
-                    processreceive(e.Result.ToString());
+                    BackgroundWorker worker = (BackgroundWorker)sender;
+                    while (!worker.CancellationPending)
+                    {
+                        receive = STR.ReadLine();
+                        worker.ReportProgress(0, "AN OBJECT TO PASS TO THE UI-THREAD");
+                    }
+                        //e.Result = receive;
+                        //backgroundWorkerReceive.CancelAsync();
+                        //processreceive(e.Result.ToString());
                 }
                 catch (Exception ex)
                 {
                     //MessageBox.Show("from Background1: " + ex.Message.ToString());
                 }
             }
+        }
+
+        private void backgroundWorkerReceive_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            processreceive(receive);
         }
 
         void backgroundWorkerReceive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -555,7 +567,8 @@ namespace RazorChat
             }
             else
             {
-                //processreceive(e.Result.ToString());
+                processreceive(e.Result.ToString());
+                backgroundWorkerReceive.RunWorkerAsync();
             }
         }
 
