@@ -40,11 +40,10 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.timerGetStatus = new System.Windows.Forms.Timer(this.components);
             this.toolStripNodes = new System.Windows.Forms.ToolStrip();
-            this.backgroundProcessReceive = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerReceive = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerSend = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -154,15 +153,6 @@
             this.debugToolStripMenuItem.Visible = false;
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // backgroundWorker2
-            // 
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
-            // 
             // timerGetStatus
             // 
             this.timerGetStatus.Interval = 5000;
@@ -176,14 +166,17 @@
             this.toolStripNodes.Location = new System.Drawing.Point(0, 39);
             this.toolStripNodes.Name = "toolStripNodes";
             this.toolStripNodes.ShowItemToolTips = false;
-            this.toolStripNodes.Size = new System.Drawing.Size(26, 142);
+            this.toolStripNodes.Size = new System.Drawing.Size(32, 142);
             this.toolStripNodes.TabIndex = 0;
             this.toolStripNodes.Text = "toolStrip2";
             // 
-            // backgroundProcessReceive
+            // backgroundWorkerReceive
             // 
-            this.backgroundProcessReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundProcessReceive_DoWork);
-            this.backgroundProcessReceive.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundProcessReceive_RunWorkerCompleted);
+            this.backgroundWorkerReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerReceive_DoWork);
+            // 
+            // backgroundWorkerSend
+            // 
+            this.backgroundWorkerSend.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerSend_DoWork);
             // 
             // RazorPage
             // 
@@ -217,13 +210,12 @@
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.Timer timerGetStatus;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStripNodes;
         private System.Windows.Forms.ToolStripButton toolStripButtonEnablePager;
         private System.Windows.Forms.ToolStripMenuItem enablePagerToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundProcessReceive;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerReceive;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerSend;
     }
 }

@@ -99,8 +99,8 @@ namespace RazorChat
                             STW = new StreamWriter(client.GetStream());
                             STR = new StreamReader(client.GetStream());
                             STW.AutoFlush = true;
-                            backgroundWorkerReceive.RunWorkerAsync();
-                            backgroundWorkerSend.WorkerSupportsCancellation = true;
+                            backgroundWorker1.RunWorkerAsync();
+                            backgroundWorker2.WorkerSupportsCancellation = true;
                             timerGetStatus.Enabled = true;
                         }
 
@@ -116,7 +116,7 @@ namespace RazorChat
                 // Disconnect
                 timerGetStatus.Enabled = false;
                 TextToSend = "QUIT";
-                backgroundWorkerSend.RunWorkerAsync();
+                backgroundWorker2.RunWorkerAsync();
                 Properties.Settings.Default.ConnectToBbs = "disconnected";
                 Properties.Settings.Default.PagerEnabled = false;
 
@@ -173,6 +173,43 @@ namespace RazorChat
             Properties.Settings.Default.Save();
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (client.Connected)
+            {
+                // receives data
+                try
+                {
+                    receive = STR.ReadLine();
+                    //backgroundProcessReceive_DoWork(sender, e);
+                    backgroundProcessReceive.RunWorkerAsync();
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show("from Background1: " + ex.Message.ToString());
+                }
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //backgroundProcessReceive.RunWorkerAsync();
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // sends data
+            if (client.Connected)
+            {
+                STW.WriteLine(TextToSend);
+            }
+            else
+            {
+                MessageBox.Show("Sending failed");
+            }
+            backgroundWorker2.CancelAsync();
+        }
+
         private void timerGetStatus_Tick(object sender, EventArgs e)
         {
             if (!clientauthenticated)
@@ -188,7 +225,7 @@ namespace RazorChat
                 TextToSend = "CHAT STATUS";
             }
             //timerGetStatus.Enabled = false;
-            backgroundWorkerSend.RunWorkerAsync();
+            backgroundWorker2.RunWorkerAsync();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,7 +367,7 @@ namespace RazorChat
             {
                 TextToSend = "PAGE DISABLE";
             }
-            backgroundWorkerSend.RunWorkerAsync();
+            backgroundWorker2.RunWorkerAsync();
         }
 
         private void toolStripButtonEnablePager_Click(object sender, EventArgs e)
@@ -355,12 +392,75 @@ namespace RazorChat
 
         private void backgroundProcessReceive_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            // processes received data
+            string localreceive = receive;
+            if (localreceive.Substring(0, 5) == "PAGER")
+            {
+                bool pagerstatus;
+                pagerstatus = setpagerstatus(localreceive.Split('.')[0]);
+                if (pagerstatus == true)
+                {
+                    // check for page
+                    string nodepagedstring = getpagerstatus(localreceive.Split('.')[1]);
+                    if (nodepagedstring != "")
+                    {
+                        //timerGetStatus.Enabled = false;
+                        // switch paging node to blue
+                        int nodepaged = int.Parse(nodepagedstring)-1;
+                        statusnodepaged[nodepaged] = true;
+                        string paginguser = getpaginguser(nodepaged);
+                        //nodepagedstring = nodepaged.ToString();
+                        //var toolstrip1Items = toolStripNodes as ToolStrip;
+                        //var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepaged, true);
+                        //btnNode[0].Image = Properties.Resources.blue_circle;
+                        //StartFlashNode(nodepaged);
+                        if (Properties.Settings.Default.VisualPagingEnabled == true)
+                        {
+                            // do visual page
+                            // make the taskbar icon flash
+                            //FlashWindow.Start(this);
+                        }
+                        if (Properties.Settings.Default.AudioPagingEnabled == true)
+                        {
+                            // do audio page
+                            var audioresource = Properties.Resources.ResourceManager.GetObject(Properties.Settings.Default.AudioPageFile);
+                            Stream str = (Stream)audioresource;
+                            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                            snd.Play();
+                        }
+                        if (Properties.Settings.Default.ExternalPagingEnabled == true)
+                        {
+                            // do external paging
+                            // interpret %t as Title, RazorPage & %m as Message (like Razor paging from node 1)
+                            string cmdargs = "";
+                            string pagemsg = paginguser + " paging from node " + (nodepaged+1).ToString();
+                            cmdargs = Properties.Settings.Default.ExternalPageOptions;
+                            cmdargs = cmdargs.Replace("%t", "RazorPage");
+                            cmdargs = cmdargs.Replace("%m", pagemsg);
+                            Process externalpagecmd = new Process();
+                            externalpagecmd.StartInfo.FileName = Properties.Settings.Default.ExternalPageCommand;
+                            externalpagecmd.StartInfo.Arguments = cmdargs;
+                            externalpagecmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                            externalpagecmd.Start();
+                        }
+                    }
+                }
+                parsenodes(localreceive.Split('.')[2]);
+            }
         }
 
         private void backgroundProcessReceive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            if (statusnodepaged != null)
+            {
+                for (int i = 0; i < status.Length; i++)
+                {
+                    if (statusnodepaged[i] == true)
+                    {
+                        StartFlashNode(i);
+                    }
+                }
+            }
         }
 
         private void initnodedisplay(string initstatus)
@@ -436,7 +536,7 @@ namespace RazorChat
             string nodepagedstring = nodepaged.ToString();
             var toolstrip1Items = toolStripNodes as ToolStrip;
             var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepagedstring, true);
-            /*if(btnNode[0].Image != Properties.Resources.blue_circle)
+            if(btnNode[0].Image != Properties.Resources.blue_circle)
             {
                 btnNode[0].Image = Properties.Resources.blue_circle;
                 //btnNode[0].Tag = "Blue";
@@ -447,10 +547,8 @@ namespace RazorChat
                 btnNode[0].Image = Properties.Resources.yellow_circle;
                 //btnNode[0].Tag = "Yellow";
                 //MessageBox.Show(nodepaged + ": Yellow");
-            }*/
-
-            btnNode[0].Image = Properties.Resources.blue_circle;
-            timerFlashnodes[nodepaged].Start();
+            }
+            //timerFlashnodes[nodepaged].Start();
         }
 
         private void StopFlashNode(int nodeclicked)
@@ -463,113 +561,6 @@ namespace RazorChat
             // this is currently failing to fire. let's try Start() 'ing this from a backgroundworker
             // Completed() method
             MessageBox.Show("flash");
-        }
-
-        private void processreceive()
-        {
-            // from DoWork
-            // processes received data
-            string localreceive = receive;
-            if (localreceive.Substring(0, 5) == "PAGER")
-            {
-                bool pagerstatus;
-                pagerstatus = setpagerstatus(localreceive.Split('.')[0]);
-                if (pagerstatus == true)
-                {
-                    // check for page
-                    string nodepagedstring = getpagerstatus(localreceive.Split('.')[1]);
-                    if (nodepagedstring != "")
-                    {
-                        //timerGetStatus.Enabled = false;
-                        // switch paging node to blue
-                        int nodepaged = int.Parse(nodepagedstring) - 1;
-                        statusnodepaged[nodepaged] = true;
-                        string paginguser = getpaginguser(nodepaged);
-                        //nodepagedstring = nodepaged.ToString();
-                        //var toolstrip1Items = toolStripNodes as ToolStrip;
-                        //var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepaged, true);
-                        //btnNode[0].Image = Properties.Resources.blue_circle;
-                        StartFlashNode(nodepaged);
-                        if (Properties.Settings.Default.VisualPagingEnabled == true)
-                        {
-                            // do visual page
-                            // make the taskbar icon flash
-                            //FlashWindow.Start(this);
-                        }
-                        if (Properties.Settings.Default.AudioPagingEnabled == true)
-                        {
-                            // do audio page
-                            var audioresource = Properties.Resources.ResourceManager.GetObject(Properties.Settings.Default.AudioPageFile);
-                            Stream str = (Stream)audioresource;
-                            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-                            snd.Play();
-                        }
-                        if (Properties.Settings.Default.ExternalPagingEnabled == true)
-                        {
-                            // do external paging
-                            // interpret %t as Title, RazorPage & %m as Message (like Razor paging from node 1)
-                            string cmdargs = "";
-                            string pagemsg = paginguser + " paging from node " + (nodepaged + 1).ToString();
-                            cmdargs = Properties.Settings.Default.ExternalPageOptions;
-                            cmdargs = cmdargs.Replace("%t", "RazorPage");
-                            cmdargs = cmdargs.Replace("%m", pagemsg);
-                            Process externalpagecmd = new Process();
-                            externalpagecmd.StartInfo.FileName = Properties.Settings.Default.ExternalPageCommand;
-                            externalpagecmd.StartInfo.Arguments = cmdargs;
-                            externalpagecmd.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                            externalpagecmd.Start();
-                        }
-                    }
-                }
-                parsenodes(localreceive.Split('.')[2]);
-            }
-
-
-            // from RunWorkerCompleted
-            /*if (statusnodepaged != null)
-            {
-                for (int i = 0; i < status.Length; i++)
-                {
-                    if (statusnodepaged[i] == true)
-                    {
-                        StartFlashNode(i);
-                    }
-                }
-            }*/
-            // end RunWorkerCompleted
-        }
-
-        private void backgroundWorkerReceive_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // started as backgroundWorker1
-            while (client.Connected)
-            {
-                // receives data
-                try
-                {
-                    receive = STR.ReadLine();
-                    processreceive();
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show("from Background1: " + ex.Message.ToString());
-                }
-            }
-        }
-
-        private void backgroundWorkerSend_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // started as backgroundWorker2
-            // sends data
-            if (client.Connected)
-            {
-                STW.WriteLine(TextToSend);
-            }
-            else
-            {
-                MessageBox.Show("Sending failed");
-            }
-            backgroundWorkerSend.CancelAsync();
         }
     }
 }
