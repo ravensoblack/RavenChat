@@ -166,13 +166,14 @@
             this.toolStripNodes.Location = new System.Drawing.Point(0, 39);
             this.toolStripNodes.Name = "toolStripNodes";
             this.toolStripNodes.ShowItemToolTips = false;
-            this.toolStripNodes.Size = new System.Drawing.Size(32, 142);
+            this.toolStripNodes.Size = new System.Drawing.Size(26, 142);
             this.toolStripNodes.TabIndex = 0;
             this.toolStripNodes.Text = "toolStrip2";
             // 
             // backgroundWorkerReceive
             // 
             this.backgroundWorkerReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerReceive_DoWork);
+            this.backgroundWorkerReceive.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerReceive_RunWorkerCompleted);
             // 
             // backgroundWorkerSend
             // 

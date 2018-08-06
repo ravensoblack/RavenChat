@@ -101,7 +101,7 @@ namespace RazorChat
                             STW.AutoFlush = true;
                             backgroundWorkerReceive.RunWorkerAsync();
                             backgroundWorkerSend.WorkerSupportsCancellation = true;
-                            timerGetStatus.Enabled = true;
+                            timerGetStatus.Start();
                         }
 
                     }
@@ -114,11 +114,12 @@ namespace RazorChat
             else
             {
                 // Disconnect
-                timerGetStatus.Enabled = false;
+                timerGetStatus.Stop();
                 TextToSend = "QUIT";
                 backgroundWorkerSend.RunWorkerAsync();
                 Properties.Settings.Default.ConnectToBbs = "disconnected";
                 Properties.Settings.Default.PagerEnabled = false;
+                clientauthenticated = false;
 
                 // reset nodes back to the disconnected display
                 initnodedisplay("disconnect");
@@ -187,7 +188,6 @@ namespace RazorChat
             {
                 TextToSend = "CHAT STATUS";
             }
-            //timerGetStatus.Enabled = false;
             backgroundWorkerSend.RunWorkerAsync();
         }
 
@@ -353,16 +353,6 @@ namespace RazorChat
             return status[nodepaged].useron;
         }
 
-        private void backgroundProcessReceive_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-        }
-
-        private void backgroundProcessReceive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-        }
-
         private void initnodedisplay(string initstatus)
         {
             // initstatus will be either init or disconnect
@@ -436,7 +426,7 @@ namespace RazorChat
             string nodepagedstring = nodepaged.ToString();
             var toolstrip1Items = toolStripNodes as ToolStrip;
             var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepagedstring, true);
-            /*if(btnNode[0].Image != Properties.Resources.blue_circle)
+            if(btnNode[0].Image != Properties.Resources.blue_circle)
             {
                 btnNode[0].Image = Properties.Resources.blue_circle;
                 //btnNode[0].Tag = "Blue";
@@ -447,10 +437,10 @@ namespace RazorChat
                 btnNode[0].Image = Properties.Resources.yellow_circle;
                 //btnNode[0].Tag = "Yellow";
                 //MessageBox.Show(nodepaged + ": Yellow");
-            }*/
+            }
 
-            btnNode[0].Image = Properties.Resources.blue_circle;
-            timerFlashnodes[nodepaged].Start();
+            //btnNode[0].Image = Properties.Resources.blue_circle;
+            //timerFlashnodes[nodepaged].Start();
         }
 
         private void StopFlashNode(int nodeclicked)
@@ -465,11 +455,11 @@ namespace RazorChat
             MessageBox.Show("flash");
         }
 
-        private void processreceive()
+        private void processreceive(string localreceive)
         {
             // from DoWork
             // processes received data
-            string localreceive = receive;
+            //string localreceive = receive;
             if (localreceive.Substring(0, 5) == "PAGER")
             {
                 bool pagerstatus;
@@ -480,7 +470,6 @@ namespace RazorChat
                     string nodepagedstring = getpagerstatus(localreceive.Split('.')[1]);
                     if (nodepagedstring != "")
                     {
-                        //timerGetStatus.Enabled = false;
                         // switch paging node to blue
                         int nodepaged = int.Parse(nodepagedstring) - 1;
                         statusnodepaged[nodepaged] = true;
@@ -548,12 +537,25 @@ namespace RazorChat
                 try
                 {
                     receive = STR.ReadLine();
-                    processreceive();
+                    e.Result = receive;
+                    processreceive(e.Result.ToString());
                 }
                 catch (Exception ex)
                 {
                     //MessageBox.Show("from Background1: " + ex.Message.ToString());
                 }
+            }
+        }
+
+        void backgroundWorkerReceive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            else
+            {
+                //processreceive(e.Result.ToString());
             }
         }
 
