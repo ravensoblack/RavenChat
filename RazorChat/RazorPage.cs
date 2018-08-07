@@ -279,24 +279,15 @@ namespace RazorChat
                     {
                         case "0":
                             btnNode[0].Image = Properties.Resources.green_circle;
-                            //this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
-                            //{
-                                btnNode[0].ForeColor = Color.Black;
-                            //}));
+                            btnNode[0].ForeColor = Color.Black;
                             break;
                         case "1":
                             btnNode[0].Image = Properties.Resources.yellow_circle;
-                            //this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
-                            //{
-                                btnNode[0].ForeColor = Color.Black;
-                            //}));
+                            btnNode[0].ForeColor = Color.Black;
                             break;
                         case "3":
                             btnNode[0].Image = Properties.Resources.yellow_circle;
-                            //this.toolStripNodes.Invoke(new MethodInvoker(delegate ()
-                            //{
-                                btnNode[0].ForeColor = Color.Black;
-                            //}));
+                            btnNode[0].ForeColor = Color.Black;
                             break;
                         default:
                             btnNode[0].Image = Properties.Resources.red_circle;
@@ -306,14 +297,11 @@ namespace RazorChat
                 if (status[i].useron != prevstatus[i].useron||status[i].nodestatusdescription!=prevstatus[i].nodestatusdescription)
                 {
                     Label nodelabel = this.Controls.Find("nodelabel" + i, true).FirstOrDefault() as Label;
-                    //this.Invoke(new MethodInvoker(delegate ()
-                    //{
-                        if(status[i].useron!="")
-                        {
-                            nodelabel.Text = status[i].useron + " ";
-                        }
-                        nodelabel.Text += status[i].nodestatusdescription;
-                    //}));
+                    if(status[i].useron!="")
+                    {
+                        nodelabel.Text = status[i].useron + " ";
+                    }
+                    nodelabel.Text += status[i].nodestatusdescription;
                 }
             }
             Properties.Settings.Default.NumberOfNodes = nodestrings.Length;
@@ -397,7 +385,6 @@ namespace RazorChat
                     timerFlashnodes[i].Enabled = false;
                     timerFlashnodes[i].Interval = 1000;
                     timerFlashnodes[i].Tick += this.timerFlashNode_Tick;
-                    //timerFlashnodes[i].Start();
                 }
             }
             else
@@ -464,7 +451,6 @@ namespace RazorChat
         {
             // from DoWork
             // processes received data
-            //string localreceive = receive;
             if (localreceive.Substring(0, 5) == "PAGER")
             {
                 bool pagerstatus;
@@ -479,17 +465,7 @@ namespace RazorChat
                         int nodepaged = int.Parse(nodepagedstring) - 1;
                         statusnodepaged[nodepaged] = true;
                         string paginguser = getpaginguser(nodepaged);
-                        //nodepagedstring = nodepaged.ToString();
-                        //var toolstrip1Items = toolStripNodes as ToolStrip;
-                        //var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepaged, true);
-                        //btnNode[0].Image = Properties.Resources.blue_circle;
                         StartFlashNode(nodepaged);
-                        if (Properties.Settings.Default.VisualPagingEnabled == true)
-                        {
-                            // do visual page
-                            // make the taskbar icon flash
-                            //FlashWindow.Start(this);
-                        }
                         if (Properties.Settings.Default.AudioPagingEnabled == true)
                         {
                             // do audio page
@@ -502,6 +478,8 @@ namespace RazorChat
                         {
                             // do external paging
                             // interpret %t as Title, RazorPage & %m as Message (like Razor paging from node 1)
+                            
+                            // we're currently getting 2 of these per page
                             string cmdargs = "";
                             string pagemsg = paginguser + " paging from node " + (nodepaged + 1).ToString();
                             cmdargs = Properties.Settings.Default.ExternalPageOptions;
@@ -517,20 +495,6 @@ namespace RazorChat
                 }
                 parsenodes(localreceive.Split('.')[2]);
             }
-
-
-            // from RunWorkerCompleted
-            /*if (statusnodepaged != null)
-            {
-                for (int i = 0; i < status.Length; i++)
-                {
-                    if (statusnodepaged[i] == true)
-                    {
-                        StartFlashNode(i);
-                    }
-                }
-            }*/
-            // end RunWorkerCompleted
         }
 
         private void backgroundWorkerReceive_DoWork(object sender, DoWorkEventArgs e)
@@ -547,9 +511,6 @@ namespace RazorChat
                         receive = STR.ReadLine();
                         worker.ReportProgress(0, "AN OBJECT TO PASS TO THE UI-THREAD");
                     }
-                        //e.Result = receive;
-                        //backgroundWorkerReceive.CancelAsync();
-                        //processreceive(e.Result.ToString());
                 }
                 catch (Exception ex)
                 {
