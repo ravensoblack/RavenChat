@@ -51,7 +51,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="AboutVersion" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">v0.1a</Value>
+      <Value Profile="(Default)">v0.2a</Value>
     </Setting>
   </Settings>
 </SettingsFile>

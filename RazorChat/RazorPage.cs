@@ -477,7 +477,7 @@ namespace RazorChat
                         if (Properties.Settings.Default.ExternalPagingEnabled == true)
                         {
                             // do external paging
-                            // interpret %t as Title, RazorPage & %m as Message (like Razor paging from node 1)
+                            // interpret %t as Title (RazorPage) & %m as Message (like Razor paging from node 1)
                             
                             // we're currently getting 2 of these per page
                             string cmdargs = "";
