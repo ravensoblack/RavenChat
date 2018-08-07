@@ -423,24 +423,13 @@ namespace RazorChat
 
         private void StartFlashNode(int nodepaged)
         {
-            //FlashWindow.Start(this);
-            string nodepagedstring = nodepaged.ToString();
-            var toolstrip1Items = toolStripNodes as ToolStrip;
-            var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodepagedstring, true);
-            /*if(btnNode[0].Image != Properties.Resources.blue_circle)
+            // visual page
+            if (Properties.Settings.Default.VisualPagingEnabled == true)
             {
-                btnNode[0].Image = Properties.Resources.blue_circle;
-                //btnNode[0].Tag = "Blue";
-                //MessageBox.Show(nodepaged + ": Blue");
+                FlashWindow.Start(this);
             }
-            else
-            {
-                btnNode[0].Image = Properties.Resources.yellow_circle;
-                //btnNode[0].Tag = "Yellow";
-                //MessageBox.Show(nodepaged + ": Yellow");
-            }*/
-
-            btnNode[0].Image = Properties.Resources.blue_circle;
+            // all pages should flash the node button
+            // this is currently failing if multiple nodes should flash for pages
             timerFlashnodes[nodepaged].Start();
         }
 
@@ -451,9 +440,24 @@ namespace RazorChat
 
         private void timerFlashNode_Tick(object sender, EventArgs e)
         {
-            // this is currently failing to fire. let's try Start() 'ing this from a backgroundworker
-            // Completed() method
-            MessageBox.Show("flash");
+            for(int i=0; i<statusnodepaged.Length; i++)
+            {
+                var toolstrip1Items = toolStripNodes as ToolStrip;
+                var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
+                if (statusnodepaged[i] == true)
+                {
+                    if (btnNode[0].Tag.ToString() == "Blue")
+                    {
+                        btnNode[0].Tag = "Yellow";
+                        btnNode[0].Image = Properties.Resources.yellow_circle;
+                    }
+                    else
+                    {
+                        btnNode[0].Tag = "Blue";
+                        btnNode[0].Image = Properties.Resources.blue_circle;
+                    }
+                }
+            }
         }
 
         private void processreceive(string localreceive)

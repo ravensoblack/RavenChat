@@ -160,7 +160,6 @@
             // checkBoxVisualPaging
             // 
             this.checkBoxVisualPaging.AutoSize = true;
-            this.checkBoxVisualPaging.Enabled = false;
             this.checkBoxVisualPaging.Location = new System.Drawing.Point(15, 80);
             this.checkBoxVisualPaging.Name = "checkBoxVisualPaging";
             this.checkBoxVisualPaging.Size = new System.Drawing.Size(89, 17);
