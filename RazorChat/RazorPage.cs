@@ -33,6 +33,7 @@ namespace RazorChat
         public bool clientauthenticated = false;
         Timer[] timerFlashnodes;
         public bool[] statusnodepaged;
+        public bool visualpageactivated = false;
 
         public RazorPage()
         {
@@ -203,7 +204,9 @@ namespace RazorChat
             ToolStripButton tsb = sender as ToolStripButton;
             if (tsb != null && tsb.Tag != null)
             {
-                //MessageBox.Show(String.Format("Hello, I'm the {0} button", tsb.Tag.ToString()) + ". name: " + tsb.Name);
+                //MessageBox.Show(String.Format("Hello, I'm the {0} button", tsb.Tag.ToString()) + ". name: " 
+                //+ tsb.Name);
+                StopFlashNode(tsb.Name);
             }
         }
 
@@ -413,16 +416,34 @@ namespace RazorChat
             // visual page
             if (Properties.Settings.Default.VisualPagingEnabled == true)
             {
+                visualpageactivated = true;
                 FlashWindow.Start(this);
             }
-            // all pages should flash the node button
+            // once a user has logged onto a node, the description doesn't reset when they log off
+            // the flashing node also doesn't reset when they log off
             // this is currently failing if multiple nodes should flash for pages
+
+            // all pages should flash the node button
             timerFlashnodes[nodepaged].Start();
         }
 
-        private void StopFlashNode(int nodeclicked)
+        private void StopFlashNode(string nodeclickedstring)
         {
+            nodeclickedstring = nodeclickedstring.Substring("nodebutton".Length, nodeclickedstring.Length - "nodebutton".Length);
+            int nodeclicked = int.Parse(nodeclickedstring);
+            statusnodepaged[nodeclicked] = false;
+            timerFlashnodes[nodeclicked].Stop();
+            var toolstrip1Items = toolStripNodes as ToolStrip;
+            var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodeclicked, true);
+            btnNode[0].Image = Properties.Resources.yellow_circle;
+            btnNode[0].Tag = nodeclickedstring;
 
+            // stop visual page
+            if(visualpageactivated==true)
+            {
+                visualpageactivated = false;
+                FlashWindow.Stop(this);
+            }
         }
 
         private void timerFlashNode_Tick(object sender, EventArgs e)
