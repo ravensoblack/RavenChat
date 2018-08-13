@@ -31,9 +31,11 @@ namespace RazorChat
         public Node[] status;
         public Node[] prevstatus;
         public bool clientauthenticated = false;
-        Timer[] timerFlashnodes;
+        // hadn't specified public
+        public Timer[] timerFlashnodes;
         public bool[] statusnodepaged;
         public bool visualpageactivated = false;
+        public int pageactivated = 0;
 
         public RazorPage()
         {
@@ -219,10 +221,7 @@ namespace RazorChat
                     Properties.Settings.Default.PagerEnabled = true;
                     toolStripButtonEnablePager.Image = Properties.Resources.green_circle;
                     toolStripButtonEnablePager.Text = "Disable Pager";
-                    //this.contextMenuStrip1.Invoke(new MethodInvoker(delegate ()
-                    //{
-                        enablePagerToolStripMenuItem.Text = "Disable Pager";
-                    //}));
+                    enablePagerToolStripMenuItem.Text = "Disable Pager";
                 }
                 return true;
             }
@@ -300,11 +299,14 @@ namespace RazorChat
                 if (status[i].useron != prevstatus[i].useron||status[i].nodestatusdescription!=prevstatus[i].nodestatusdescription)
                 {
                     Label nodelabel = this.Controls.Find("nodelabel" + i, true).FirstOrDefault() as Label;
-                    if(status[i].useron!="")
+                    if (status[i].useron != "")
                     {
-                        nodelabel.Text = status[i].useron + " ";
+                        nodelabel.Text = status[i].useron + " " + status[i].nodestatusdescription;
                     }
-                    nodelabel.Text += status[i].nodestatusdescription;
+                    else
+                    {
+                        nodelabel.Text = status[i].nodestatusdescription;
+                    }
                 }
             }
             Properties.Settings.Default.NumberOfNodes = nodestrings.Length;
@@ -417,11 +419,9 @@ namespace RazorChat
             if (Properties.Settings.Default.VisualPagingEnabled == true)
             {
                 visualpageactivated = true;
+                pageactivated++;
                 FlashWindow.Start(this);
             }
-            // once a user has logged onto a node, the description doesn't reset when they log off
-            // the flashing node also doesn't reset when they log off
-            // this is currently failing if multiple nodes should flash for pages
 
             // all pages should flash the node button
             timerFlashnodes[nodepaged].Start();
@@ -429,6 +429,7 @@ namespace RazorChat
 
         private void StopFlashNode(string nodeclickedstring)
         {
+            pageactivated--;
             nodeclickedstring = nodeclickedstring.Substring("nodebutton".Length, nodeclickedstring.Length - "nodebutton".Length);
             int nodeclicked = int.Parse(nodeclickedstring);
             statusnodepaged[nodeclicked] = false;
@@ -482,7 +483,6 @@ namespace RazorChat
                     string nodepagedstring = getpagerstatus(localreceive.Split('.')[1]);
                     if (nodepagedstring != "")
                     {
-                        // switch paging node to blue
                         int nodepaged = int.Parse(nodepagedstring) - 1;
                         statusnodepaged[nodepaged] = true;
                         string paginguser = getpaginguser(nodepaged);
@@ -499,8 +499,6 @@ namespace RazorChat
                         {
                             // do external paging
                             // interpret %t as Title (RazorPage) & %m as Message (like Razor paging from node 1)
-                            
-                            // we're currently getting 2 of these per page
                             string cmdargs = "";
                             string pagemsg = paginguser + " paging from node " + (nodepaged + 1).ToString();
                             cmdargs = Properties.Settings.Default.ExternalPageOptions;
