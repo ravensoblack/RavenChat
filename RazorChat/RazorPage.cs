@@ -31,7 +31,6 @@ namespace RazorChat
         public Node[] status;
         public Node[] prevstatus;
         public bool clientauthenticated = false;
-        // hadn't specified public
         public Timer[] timerFlashnodes;
         public bool[] statusnodepaged;
         public bool visualpageactivated = false;
@@ -258,6 +257,16 @@ namespace RazorChat
             // format: NODES:nodenumber,nodestatusnumber,useron,nodestatusdescription
             for (int i = 0; i < nodestrings.Length; i++)
             {
+                // reset paged nodes after logoff
+                var toolstrip1Items = toolStripNodes as ToolStrip;
+                var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
+                if (statusnodepaged[i]==false && (btnNode[0].Tag.ToString()=="Blue" || btnNode[0].Tag.ToString()=="Yellow"))
+                {
+                    //btnNode[0].Tag = i;
+                    //btnNode[0].Image = Properties.Resources.green_circle;
+                    StopFlashNode(i.ToString());
+                }
+
                 status[i].nodenumber = nodestrings[i].Split(statseparator)[0];
                 status[i].nodestatusnumber = nodestrings[i].Split(statseparator)[1];
                 status[i].useron = nodestrings[i].Split(statseparator)[2];
@@ -275,8 +284,8 @@ namespace RazorChat
                 }
                 if (status[i].nodestatusnumber != prevstatus[i].nodestatusnumber)
                 {
-                    var toolstrip1Items = toolStripNodes as ToolStrip;
-                    var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
+                    //var toolstrip1Items = toolStripNodes as ToolStrip;
+                    //var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
                     switch (status[i].nodestatusnumber)
                     {
                         case "0":
@@ -438,9 +447,17 @@ namespace RazorChat
             var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodeclicked, true);
             btnNode[0].Image = Properties.Resources.yellow_circle;
             btnNode[0].Tag = nodeclickedstring;
+            if (pageactivated < 1)
+            {
+                // stop the flash timer on all nodes
+                for(int i=0; i<statusnodepaged.Length; i++)
+                {
+                    timerFlashnodes[i].Stop();
+                }
+            }
 
             // stop visual page
-            if(visualpageactivated==true)
+            if (visualpageactivated==true)
             {
                 visualpageactivated = false;
                 FlashWindow.Stop(this);
