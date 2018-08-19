@@ -34,6 +34,7 @@
             this.toolStripButtonEnablePager = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDebug = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonStatus = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enablePagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,7 @@
             this.toolStripButtonConnect,
             this.toolStripButtonEnablePager,
             this.toolStripButtonSettings,
+            this.toolStripButtonStatus,
             this.toolStripButtonDebug});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -104,6 +106,17 @@
             this.toolStripButtonDebug.Text = "Debug";
             this.toolStripButtonDebug.Visible = false;
             this.toolStripButtonDebug.Click += new System.EventHandler(this.toolStripButtonDebug_Click);
+            // 
+            // toolStripButtonStatus
+            // 
+            this.toolStripButtonStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonStatus.Image = global::RazorChat.Properties.Resources.icons8_bug_nolan_50;
+            this.toolStripButtonStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonStatus.Name = "toolStripButtonStatus";
+            this.toolStripButtonStatus.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonStatus.Text = "CHAT STATUS";
+            this.toolStripButtonStatus.Visible = false;
+            this.toolStripButtonStatus.Click += new System.EventHandler(this.toolStripButtonStatus_Click);
             // 
             // contextMenuStrip1
             // 
@@ -219,5 +232,6 @@
         private System.Windows.Forms.ToolStripMenuItem enablePagerToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerReceive;
         private System.ComponentModel.BackgroundWorker backgroundWorkerSend;
+        private System.Windows.Forms.ToolStripButton toolStripButtonStatus;
     }
 }

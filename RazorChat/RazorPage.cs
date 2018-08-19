@@ -55,6 +55,7 @@ namespace RazorChat
                 {
                     debugToolStripMenuItem.Visible = true;
                     toolStripButtonDebug.Visible = true;
+                    toolStripButtonStatus.Visible = true;
                 }
             }
         }
@@ -90,6 +91,7 @@ namespace RazorChat
                     IPEndPoint IpEnd = new IPEndPoint(host.AddressList[0], int.Parse(Properties.Settings.Default.ChatPort));
                     try
                     {
+                        initnodedisplay("connect");
                         client.Connect(IpEnd);
 
                         if (client.Connected)
@@ -106,7 +108,18 @@ namespace RazorChat
                             backgroundWorkerReceive.RunWorkerAsync();
                             backgroundWorkerSend.WorkerSupportsCancellation = true;
                             backgroundWorkerReceive.WorkerReportsProgress = true;
-                            timerGetStatus.Start();
+                            string[] args = Environment.GetCommandLineArgs();
+                            if (args.Length > 1)
+                            {
+                                // CHAT STATUS will be manual instead of timed when in debug mode
+                                if (args[1] == "debug")
+                                {
+                                }
+                            }
+                            else
+                            {
+                                timerGetStatus.Start();
+                            }
                         }
 
                     }
@@ -130,6 +143,7 @@ namespace RazorChat
                 initnodedisplay("disconnect");
 
                 client.Close();
+                resetnodestatuses();
             }
         }
 
@@ -263,12 +277,6 @@ namespace RazorChat
                 {
                     StopFlashNode("nodebutton" + i.ToString());
                 }
-                /*if (statusnodepaged[i]==false && (btnNode[0].Tag.ToString()=="Blue" || btnNode[0].Tag.ToString()=="Yellow"))
-                {
-                    //btnNode[0].Tag = i;
-                    //btnNode[0].Image = Properties.Resources.green_circle;
-                    //StopFlashNode("nodebutton"+i.ToString());
-                }*/
 
                 status[i].nodenumber = nodestrings[i].Split(statseparator)[0];
                 status[i].nodestatusnumber = nodestrings[i].Split(statseparator)[1];
@@ -287,8 +295,6 @@ namespace RazorChat
                 }
                 if (status[i].nodestatusnumber != prevstatus[i].nodestatusnumber)
                 {
-                    //var toolstrip1Items = toolStripNodes as ToolStrip;
-                    //var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
                     switch (status[i].nodestatusnumber)
                     {
                         case "0":
@@ -422,7 +428,8 @@ namespace RazorChat
             }
             // change to if initstatus==disconnect
             // add another if for initstatus==connect or maybe reconnect
-            else
+            // if this works it should become a CASE
+            if(initstatus=="disconnect")
             {
                 toolStripButtonConnect.Image = Properties.Resources.icons8_disconnected_nolan_50;
                 toolStripButtonEnablePager.Image = Properties.Resources.red_circle;
@@ -440,6 +447,10 @@ namespace RazorChat
                     Label nodelabel = this.Controls.Find("nodelabel" + i, true).FirstOrDefault() as Label;
                     nodelabel.Text = "";
                 }
+            }
+            if(initstatus=="connect")
+            {
+
             }
         }
 
@@ -583,15 +594,7 @@ namespace RazorChat
 
         void backgroundWorkerReceive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            /*if (e.Error != null)
-            {
-                MessageBox.Show(e.Error.Message);
-            }
-            else
-            {
-                processreceive(e.Result.ToString());
-                backgroundWorkerReceive.RunWorkerAsync();
-            }*/
+
         }
 
         private void backgroundWorkerSend_DoWork(object sender, DoWorkEventArgs e)
@@ -607,6 +610,40 @@ namespace RazorChat
                 MessageBox.Show("Sending failed");
             }
             backgroundWorkerSend.CancelAsync();
+        }
+
+        private void toolStripButtonStatus_Click(object sender, EventArgs e)
+        {
+            if (!clientauthenticated)
+            {
+                // The authentication command will be "AUTHINFO username password syspass"
+                TextToSend = "AUTHINFO " + Properties.Settings.Default.SysopUsername + " " +
+                    Properties.Settings.Default.SysopPassword + " " +
+                    Properties.Settings.Default.SystemPassword;
+                clientauthenticated = true;
+            }
+            else
+            {
+                TextToSend = "CHAT STATUS";
+            }
+            backgroundWorkerSend.RunWorkerAsync();
+        }
+
+        private void resetnodestatuses()
+        {
+            // format: NODES:nodenumber,nodestatusnumber,useron,nodestatusdescription
+            for (int i=0; i<status.Length; i++)
+            {
+                prevstatus[i].nodenumber = "";
+                prevstatus[i].nodestatusnumber = "";
+                prevstatus[i].useron = "";
+                prevstatus[i].nodestatusdescription = "";
+
+                status[i].nodenumber = "";
+                status[i].nodestatusnumber = "";
+                status[i].useron = "";
+                status[i].nodestatusdescription = "";
+            }
         }
     }
 }
