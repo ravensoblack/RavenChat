@@ -18,7 +18,7 @@ namespace RazorChat
     public struct Node
     {
         public string nodenumber, nodestatusnumber, useron, nodestatusdescription;
-        //public bool paged;
+        public bool userloggedon, userloggedoff;
     }
 
     public partial class RazorPage : Form
@@ -34,7 +34,9 @@ namespace RazorChat
         public Timer[] timerFlashnodes;
         public bool[] statusnodepaged;
         public bool visualpageactivated = false;
-        public int pageactivated = 0;
+        public int pageactivated = 0; // number of nodes pages are active for
+        //public bool[] userloggedon;
+        //public bool[] userloggedoff;
 
         public RazorPage()
         {
@@ -231,10 +233,7 @@ namespace RazorChat
                     Properties.Settings.Default.PagerEnabled = false;
                     toolStripButtonEnablePager.Image = Properties.Resources.red_circle;
                     toolStripButtonEnablePager.Text = "Enable Pager";
-                    //this.contextMenuStrip1.Invoke(new MethodInvoker(delegate ()
-                    //{
-                        enablePagerToolStripMenuItem.Text = "Enable Pager";
-                    //}));
+                    enablePagerToolStripMenuItem.Text = "Enable Pager";
                 }
                 return false;
             }
@@ -260,12 +259,16 @@ namespace RazorChat
                 // reset paged nodes after logoff
                 var toolstrip1Items = toolStripNodes as ToolStrip;
                 var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
-                if (statusnodepaged[i]==false && (btnNode[0].Tag.ToString()=="Blue" || btnNode[0].Tag.ToString()=="Yellow"))
+                if(status[i].userloggedoff && statusnodepaged[i]==true)
+                {
+                    StopFlashNode("nodebutton" + i.ToString());
+                }
+                /*if (statusnodepaged[i]==false && (btnNode[0].Tag.ToString()=="Blue" || btnNode[0].Tag.ToString()=="Yellow"))
                 {
                     //btnNode[0].Tag = i;
                     //btnNode[0].Image = Properties.Resources.green_circle;
-                    StopFlashNode(i.ToString());
-                }
+                    //StopFlashNode("nodebutton"+i.ToString());
+                }*/
 
                 status[i].nodenumber = nodestrings[i].Split(statseparator)[0];
                 status[i].nodestatusnumber = nodestrings[i].Split(statseparator)[1];
@@ -289,10 +292,26 @@ namespace RazorChat
                     switch (status[i].nodestatusnumber)
                     {
                         case "0":
+                            if (prevstatus[i].nodestatusnumber == "1")
+                            {
+                                status[i].userloggedoff = true;
+                            }
+                            else
+                            {
+                                status[i].userloggedoff = false;
+                            }
                             btnNode[0].Image = Properties.Resources.green_circle;
                             btnNode[0].ForeColor = Color.Black;
                             break;
                         case "1":
+                            if(prevstatus[i].nodestatusnumber=="0")
+                            {
+                                status[i].userloggedon = true;
+                            }
+                            else
+                            {
+                                status[i].userloggedon = false;
+                            }
                             btnNode[0].Image = Properties.Resources.yellow_circle;
                             btnNode[0].ForeColor = Color.Black;
                             break;
@@ -401,6 +420,8 @@ namespace RazorChat
                     timerFlashnodes[i].Tick += this.timerFlashNode_Tick;
                 }
             }
+            // change to if initstatus==disconnect
+            // add another if for initstatus==connect or maybe reconnect
             else
             {
                 toolStripButtonConnect.Image = Properties.Resources.icons8_disconnected_nolan_50;
@@ -562,7 +583,7 @@ namespace RazorChat
 
         void backgroundWorkerReceive_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Error != null)
+            /*if (e.Error != null)
             {
                 MessageBox.Show(e.Error.Message);
             }
@@ -570,7 +591,7 @@ namespace RazorChat
             {
                 processreceive(e.Result.ToString());
                 backgroundWorkerReceive.RunWorkerAsync();
-            }
+            }*/
         }
 
         private void backgroundWorkerSend_DoWork(object sender, DoWorkEventArgs e)
