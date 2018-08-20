@@ -41,3 +41,4 @@ Thumbs.db
 *.png
 RazorChat/obj/Debug/
 .vs/
+RazorChat/publish/
