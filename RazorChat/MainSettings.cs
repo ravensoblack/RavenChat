@@ -33,7 +33,8 @@ namespace RazorChat
             }
 
             textHost.Text = Properties.Settings.Default.BbsHostOrIp;
-            textPort.Text = Properties.Settings.Default.ChatPort;
+            textPagerPort.Text = Properties.Settings.Default.PagerPort;
+            textChatPort.Text = Properties.Settings.Default.ChatPort;
             // don't fill in username if it wasn't filled in here originally
             if (Properties.Settings.Default.UsernameSavedOnMain==true)
             {
@@ -75,13 +76,21 @@ namespace RazorChat
             }
             // fill in the default port if left blank
             Properties.Settings.Default.BbsHostOrIp = textHost.Text;
-            if (textPort.Text != "")
+            if (textPagerPort.Text != "")
             {
-                Properties.Settings.Default.ChatPort = textPort.Text;
+                Properties.Settings.Default.PagerPort = textPagerPort.Text;
             }
             else
             {
-                Properties.Settings.Default.ChatPort = "10005";
+                Properties.Settings.Default.PagerPort = "10005";
+            }
+            if(textChatPort.Text != "")
+            {
+                Properties.Settings.Default.ChatPort = textChatPort.Text;
+            }
+            else
+            {
+                Properties.Settings.Default.ChatPort = "10006";
             }
             Properties.Settings.Default.SysopUsername = textSysopUsername.Text;
             Properties.Settings.Default.SysopPassword = textPassword.Text;
@@ -95,7 +104,7 @@ namespace RazorChat
 
             if(Properties.Settings.Default.ConnectToBbs=="connecting")
             {
-                if(Properties.Settings.Default.BbsHostOrIp=="" || Properties.Settings.Default.ChatPort=="")
+                if(Properties.Settings.Default.BbsHostOrIp=="" || Properties.Settings.Default.PagerPort=="")
                 {
                     Properties.Settings.Default.ConnectToBbs = "disconnected";
                 }

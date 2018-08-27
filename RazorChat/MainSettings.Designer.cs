@@ -40,7 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textHost = new System.Windows.Forms.TextBox();
-            this.textPort = new System.Windows.Forms.TextBox();
+            this.textPagerPort = new System.Windows.Forms.TextBox();
             this.checkBoxVisualPaging = new System.Windows.Forms.CheckBox();
             this.checkBoxAudioPaging = new System.Windows.Forms.CheckBox();
             this.checkBoxExternalPaging = new System.Windows.Forms.CheckBox();
@@ -52,6 +52,8 @@
             this.buttonRevealPassword = new System.Windows.Forms.Button();
             this.textBoxExtPageOptions = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.textChatPort = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -86,7 +88,7 @@
             this.textSysopUsername.Location = new System.Drawing.Point(335, 13);
             this.textSysopUsername.Name = "textSysopUsername";
             this.textSysopUsername.Size = new System.Drawing.Size(100, 20);
-            this.textSysopUsername.TabIndex = 3;
+            this.textSysopUsername.TabIndex = 4;
             // 
             // textPassword
             // 
@@ -94,7 +96,7 @@
             this.textPassword.Name = "textPassword";
             this.textPassword.PasswordChar = '*';
             this.textPassword.Size = new System.Drawing.Size(100, 20);
-            this.textPassword.TabIndex = 4;
+            this.textPassword.TabIndex = 5;
             // 
             // textSysPassword
             // 
@@ -102,14 +104,14 @@
             this.textSysPassword.Name = "textSysPassword";
             this.textSysPassword.PasswordChar = '*';
             this.textSysPassword.Size = new System.Drawing.Size(100, 20);
-            this.textSysPassword.TabIndex = 5;
+            this.textSysPassword.TabIndex = 6;
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(120, 160);
+            this.buttonOK.Location = new System.Drawing.Point(120, 178);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 12;
+            this.buttonOK.TabIndex = 13;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -117,7 +119,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(278, 160);
+            this.buttonCancel.Location = new System.Drawing.Point(278, 178);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 17;
@@ -139,9 +141,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(12, 43);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 13);
+            this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Port";
+            this.label5.Text = "Pager Port";
             // 
             // textHost
             // 
@@ -150,30 +152,30 @@
             this.textHost.Size = new System.Drawing.Size(100, 20);
             this.textHost.TabIndex = 1;
             // 
-            // textPort
+            // textPagerPort
             // 
-            this.textPort.Location = new System.Drawing.Point(109, 39);
-            this.textPort.Name = "textPort";
-            this.textPort.Size = new System.Drawing.Size(100, 20);
-            this.textPort.TabIndex = 2;
+            this.textPagerPort.Location = new System.Drawing.Point(109, 39);
+            this.textPagerPort.Name = "textPagerPort";
+            this.textPagerPort.Size = new System.Drawing.Size(100, 20);
+            this.textPagerPort.TabIndex = 2;
             // 
             // checkBoxVisualPaging
             // 
             this.checkBoxVisualPaging.AutoSize = true;
-            this.checkBoxVisualPaging.Location = new System.Drawing.Point(15, 80);
+            this.checkBoxVisualPaging.Location = new System.Drawing.Point(15, 98);
             this.checkBoxVisualPaging.Name = "checkBoxVisualPaging";
             this.checkBoxVisualPaging.Size = new System.Drawing.Size(89, 17);
-            this.checkBoxVisualPaging.TabIndex = 6;
+            this.checkBoxVisualPaging.TabIndex = 7;
             this.checkBoxVisualPaging.Text = "Visual paging";
             this.checkBoxVisualPaging.UseVisualStyleBackColor = true;
             // 
             // checkBoxAudioPaging
             // 
             this.checkBoxAudioPaging.AutoSize = true;
-            this.checkBoxAudioPaging.Location = new System.Drawing.Point(15, 104);
+            this.checkBoxAudioPaging.Location = new System.Drawing.Point(15, 122);
             this.checkBoxAudioPaging.Name = "checkBoxAudioPaging";
             this.checkBoxAudioPaging.Size = new System.Drawing.Size(88, 17);
-            this.checkBoxAudioPaging.TabIndex = 7;
+            this.checkBoxAudioPaging.TabIndex = 8;
             this.checkBoxAudioPaging.Text = "Audio paging";
             this.checkBoxAudioPaging.UseVisualStyleBackColor = true;
             this.checkBoxAudioPaging.CheckedChanged += new System.EventHandler(this.checkBoxAudioPaging_CheckedChanged);
@@ -181,10 +183,10 @@
             // checkBoxExternalPaging
             // 
             this.checkBoxExternalPaging.AutoSize = true;
-            this.checkBoxExternalPaging.Location = new System.Drawing.Point(15, 128);
+            this.checkBoxExternalPaging.Location = new System.Drawing.Point(15, 146);
             this.checkBoxExternalPaging.Name = "checkBoxExternalPaging";
             this.checkBoxExternalPaging.Size = new System.Drawing.Size(155, 17);
-            this.checkBoxExternalPaging.TabIndex = 8;
+            this.checkBoxExternalPaging.TabIndex = 9;
             this.checkBoxExternalPaging.Text = "External paging/notification";
             this.checkBoxExternalPaging.UseVisualStyleBackColor = true;
             this.checkBoxExternalPaging.CheckedChanged += new System.EventHandler(this.checkBoxExternalPaging_CheckedChanged);
@@ -193,26 +195,26 @@
             // 
             this.comboBoxAudioFile.Enabled = false;
             this.comboBoxAudioFile.FormattingEnabled = true;
-            this.comboBoxAudioFile.Location = new System.Drawing.Point(133, 101);
+            this.comboBoxAudioFile.Location = new System.Drawing.Point(133, 119);
             this.comboBoxAudioFile.MaxDropDownItems = 21;
             this.comboBoxAudioFile.Name = "comboBoxAudioFile";
             this.comboBoxAudioFile.Size = new System.Drawing.Size(260, 21);
-            this.comboBoxAudioFile.TabIndex = 9;
+            this.comboBoxAudioFile.TabIndex = 10;
             // 
             // textBoxExtPageCommand
             // 
             this.textBoxExtPageCommand.Enabled = false;
-            this.textBoxExtPageCommand.Location = new System.Drawing.Point(176, 128);
+            this.textBoxExtPageCommand.Location = new System.Drawing.Point(176, 146);
             this.textBoxExtPageCommand.Name = "textBoxExtPageCommand";
             this.textBoxExtPageCommand.Size = new System.Drawing.Size(105, 20);
-            this.textBoxExtPageCommand.TabIndex = 10;
+            this.textBoxExtPageCommand.TabIndex = 11;
             this.toolTip1.SetToolTip(this.textBoxExtPageCommand, "Command");
             // 
             // buttonDisplayInfo
             // 
             this.buttonDisplayInfo.BackgroundImage = global::RazorChat.Properties.Resources.icons8_info_win10_50;
             this.buttonDisplayInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonDisplayInfo.Location = new System.Drawing.Point(400, 124);
+            this.buttonDisplayInfo.Location = new System.Drawing.Point(400, 142);
             this.buttonDisplayInfo.Name = "buttonDisplayInfo";
             this.buttonDisplayInfo.Size = new System.Drawing.Size(23, 23);
             this.buttonDisplayInfo.TabIndex = 16;
@@ -224,7 +226,7 @@
             this.buttonPlayAudioFile.BackgroundImage = global::RazorChat.Properties.Resources.icons8_play_win10_50;
             this.buttonPlayAudioFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonPlayAudioFile.Enabled = false;
-            this.buttonPlayAudioFile.Location = new System.Drawing.Point(400, 98);
+            this.buttonPlayAudioFile.Location = new System.Drawing.Point(400, 116);
             this.buttonPlayAudioFile.Name = "buttonPlayAudioFile";
             this.buttonPlayAudioFile.Size = new System.Drawing.Size(23, 23);
             this.buttonPlayAudioFile.TabIndex = 15;
@@ -256,11 +258,27 @@
             // textBoxExtPageOptions
             // 
             this.textBoxExtPageOptions.Enabled = false;
-            this.textBoxExtPageOptions.Location = new System.Drawing.Point(287, 127);
+            this.textBoxExtPageOptions.Location = new System.Drawing.Point(287, 145);
             this.textBoxExtPageOptions.Name = "textBoxExtPageOptions";
             this.textBoxExtPageOptions.Size = new System.Drawing.Size(105, 20);
-            this.textBoxExtPageOptions.TabIndex = 11;
+            this.textBoxExtPageOptions.TabIndex = 12;
             this.toolTip1.SetToolTip(this.textBoxExtPageOptions, "Arguments: %t is Title, %m is Message");
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 69);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Chat Port";
+            // 
+            // textChatPort
+            // 
+            this.textChatPort.Location = new System.Drawing.Point(109, 67);
+            this.textChatPort.Name = "textChatPort";
+            this.textChatPort.Size = new System.Drawing.Size(100, 20);
+            this.textChatPort.TabIndex = 3;
             // 
             // MainSettings
             // 
@@ -268,7 +286,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(478, 193);
+            this.ClientSize = new System.Drawing.Size(478, 212);
+            this.Controls.Add(this.textChatPort);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxExtPageOptions);
             this.Controls.Add(this.buttonDisplayInfo);
             this.Controls.Add(this.textBoxExtPageCommand);
@@ -279,7 +299,7 @@
             this.Controls.Add(this.checkBoxVisualPaging);
             this.Controls.Add(this.buttonRevealSysPassword);
             this.Controls.Add(this.buttonRevealPassword);
-            this.Controls.Add(this.textPort);
+            this.Controls.Add(this.textPagerPort);
             this.Controls.Add(this.textHost);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -312,7 +332,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textHost;
-        private System.Windows.Forms.TextBox textPort;
+        private System.Windows.Forms.TextBox textPagerPort;
         private System.Windows.Forms.Button buttonRevealPassword;
         private System.Windows.Forms.Button buttonRevealSysPassword;
         private System.Windows.Forms.CheckBox checkBoxVisualPaging;
@@ -324,5 +344,7 @@
         private System.Windows.Forms.Button buttonDisplayInfo;
         private System.Windows.Forms.TextBox textBoxExtPageOptions;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textChatPort;
     }
 }

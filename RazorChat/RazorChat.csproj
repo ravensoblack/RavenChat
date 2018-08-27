@@ -94,6 +94,12 @@
     <Compile Include="MainSettings.Designer.cs">
       <DependentUpon>MainSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="RazorChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RazorChat.Designer.cs">
+      <DependentUpon>RazorChat.cs</DependentUpon>
+    </Compile>
     <Compile Include="RazorChatDebug.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainSettings.resx">
       <DependentUpon>MainSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RazorChat.resx">
+      <DependentUpon>RazorChat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RazorChatDebug.resx">
       <DependentUpon>RazorChatDebug.cs</DependentUpon>

@@ -37,7 +37,7 @@ namespace RazorChat.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10005")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10006")]
         public string ChatPort {
             get {
                 return ((string)(this["ChatPort"]));
@@ -221,6 +221,18 @@ namespace RazorChat.Properties {
         public string AboutVersion {
             get {
                 return ((string)(this["AboutVersion"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10005")]
+        public string PagerPort {
+            get {
+                return ((string)(this["PagerPort"]));
+            }
+            set {
+                this["PagerPort"] = value;
             }
         }
     }
