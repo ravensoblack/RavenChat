@@ -217,7 +217,7 @@ namespace RazorChat.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("v0.3a")]
+        [global::System.Configuration.DefaultSettingValueAttribute("v0.5a")]
         public string AboutVersion {
             get {
                 return ((string)(this["AboutVersion"]));

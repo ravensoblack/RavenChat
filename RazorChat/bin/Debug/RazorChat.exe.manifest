@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bRZa1TRHHcekbl5WPy7AtVAma1dqpwOKIEIeOpx+dSg=</dsig:DigestValue>
+        <dsig:DigestValue>P+xVuoiupMKgIHSz0FyUEhYRF+n12wwiXpSlWES2o0k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -60,7 +60,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>FlTkXoTeJ7woFIxO20DJaVxaHesoBPIPUwawjxLzvVE=</dsig:DigestValue>
+      <dsig:DigestValue>Lv/YSFAXmDbj38EVB2Ygk6Of78e+O0+JXK7ogLR6ulw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\icons8-chatabout-color-50.ico" size="10462">
