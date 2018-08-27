@@ -273,10 +273,6 @@ namespace RazorChat
                 // reset paged nodes after logoff
                 var toolstrip1Items = toolStripNodes as ToolStrip;
                 var btnNode = toolstrip1Items.Items.Find("nodebutton" + i, true);
-                if(status[i].userloggedoff && statusnodepaged[i]==true)
-                {
-                    StopFlashNode("nodebutton" + i.ToString());
-                }
 
                 status[i].nodenumber = nodestrings[i].Split(statseparator)[0];
                 status[i].nodestatusnumber = nodestrings[i].Split(statseparator)[1];
@@ -298,7 +294,8 @@ namespace RazorChat
                     switch (status[i].nodestatusnumber)
                     {
                         case "0":
-                            if (prevstatus[i].nodestatusnumber == "1")
+                            // logged off, prevstatus was > 0
+                            if (prevstatus[i].nodestatusnumber != "0")
                             {
                                 status[i].userloggedoff = true;
                             }
@@ -310,7 +307,13 @@ namespace RazorChat
                             btnNode[0].ForeColor = Color.Black;
                             break;
                         case "1":
-                            if(prevstatus[i].nodestatusnumber=="0")
+                            // at logon
+                            btnNode[0].Image = Properties.Resources.yellow_circle;
+                            btnNode[0].ForeColor = Color.Black;
+                            break;
+                        case "3":
+                            // logged on, prevstatus was < 3
+                            if (prevstatus[i].nodestatusnumber != "3")
                             {
                                 status[i].userloggedon = true;
                             }
@@ -321,15 +324,16 @@ namespace RazorChat
                             btnNode[0].Image = Properties.Resources.yellow_circle;
                             btnNode[0].ForeColor = Color.Black;
                             break;
-                        case "3":
-                            btnNode[0].Image = Properties.Resources.yellow_circle;
-                            btnNode[0].ForeColor = Color.Black;
-                            break;
                         default:
                             btnNode[0].Image = Properties.Resources.red_circle;
                             break;
                     }
                 }
+                if (status[i].userloggedoff && statusnodepaged[i] == true)
+                {
+                    StopFlashNode("nodebutton" + i.ToString());
+                }
+
                 if (status[i].useron != prevstatus[i].useron||status[i].nodestatusdescription!=prevstatus[i].nodestatusdescription)
                 {
                     Label nodelabel = this.Controls.Find("nodelabel" + i, true).FirstOrDefault() as Label;
@@ -477,7 +481,14 @@ namespace RazorChat
             timerFlashnodes[nodeclicked].Stop();
             var toolstrip1Items = toolStripNodes as ToolStrip;
             var btnNode = toolstrip1Items.Items.Find("nodebutton" + nodeclicked, true);
-            btnNode[0].Image = Properties.Resources.yellow_circle;
+            if (status[nodeclicked].userloggedoff == true)
+            {
+                btnNode[0].Image = Properties.Resources.green_circle;
+            }
+            else
+            {
+                btnNode[0].Image = Properties.Resources.yellow_circle;
+            }
             btnNode[0].Tag = nodeclickedstring;
             if (pageactivated < 1)
             {
