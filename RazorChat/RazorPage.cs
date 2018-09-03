@@ -35,8 +35,6 @@ namespace RazorChat
         public bool[] statusnodepaged;
         public bool visualpageactivated = false;
         public int pageactivated = 0; // number of nodes pages are active for
-        //public bool[] userloggedon;
-        //public bool[] userloggedoff;
 
         public RazorPage()
         {
@@ -47,11 +45,18 @@ namespace RazorChat
         {
             initnodedisplay("init");
 
-            // currently only takes a single command line argument, debug
+            // currently only takes a single command line argument, debugall
+            /* need to add the following debug options:
+             * debugall: have all debug options active
+             * debugallpage: all page window debug active
+             * debugpagewindow: enable the debug window for the pager
+             * debugpage: turn off the CHAT STATUS timer & enable debugging on the main page window
+             * debugchatwindow: enable the debug chat window */
+
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
-                if (args[1] == "debug")
+                if (args[1] == "debugall")
                 {
                     debugToolStripMenuItem.Visible = true;
                     toolStripButtonDebug.Visible = true;
@@ -112,7 +117,7 @@ namespace RazorChat
                             if (args.Length > 1)
                             {
                                 // CHAT STATUS will be manual instead of timed when in debug mode
-                                if (args[1] == "debug")
+                                if (args[1] == "debugall")
                                 {
                                 }
                             }
@@ -284,8 +289,8 @@ namespace RazorChat
                  * Yellow (or maybe Gray): User logged in
                  * Red: Maintenance of some sort
                  * */
-                // visual node status
-                if(prevstatus==null)
+            // visual node status
+            if (prevstatus==null)
                 {
                     prevstatus = new Node[nodestrings.Length];
                 }
