@@ -59,8 +59,10 @@ namespace RazorChat
                 if (args[1] == "debugall")
                 {
                     debugToolStripMenuItem.Visible = true;
-                    toolStripButtonDebug.Visible = true;
+                    toolStripButtonDebugPager.Visible = true;
                     toolStripButtonStatus.Visible = true;
+                    debugChatToolStripMenuItem.Visible = true;
+                    toolStripButtonDebugChat.Visible = true;
                 }
             }
         }
@@ -160,7 +162,7 @@ namespace RazorChat
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RazorChatDebug debugForm = new RazorChatDebug();
+            RazorPageDebug debugForm = new RazorPageDebug();
             debugForm.Show();
         }
 
@@ -660,6 +662,18 @@ namespace RazorChat
                 status[i].useron = "";
                 status[i].nodestatusdescription = "";
             }
+        }
+
+        private void debugChatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RazorChatDebug debugChatForm = new RazorChatDebug();
+            debugChatForm.Show();
+        }
+
+        private void toolStripButtonDebugChat_Click(object sender, EventArgs e)
+        {
+            RazorChatDebug debugChatForm = new RazorChatDebug();
+            debugChatForm.Show();
         }
     }
 }

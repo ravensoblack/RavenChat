@@ -13,12 +13,6 @@ using System.IO;
 
 namespace RazorChat
 {
-    // format: NODES:nodenumber,nodestatusnumber,useron,nodestatusdescription
-    public struct NodeDebug
-    {
-        public string nodenumber, nodestatusnumber, useron, nodestatusdescription;
-    }
-
     public partial class RazorChatDebug : Form
     {
         private TcpClient client;
@@ -34,51 +28,46 @@ namespace RazorChat
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            StatustextBox.Text = "";
+            ChattextBox.Text = "";
             client = new TcpClient();
             IPHostEntry host;
-            host = Dns.GetHostEntry(HostNametextBox.Text);
-            IPEndPoint IpEnd = new IPEndPoint(host.AddressList[0], int.Parse("10005"));
+            host = Dns.GetHostEntry(textBoxHostname.Text);
+            IPEndPoint IpEnd = new IPEndPoint(host.AddressList[0], int.Parse("10006"));
             try
             {
                 client.Connect(IpEnd);
 
                 if (client.Connected)
                 {
-                    StatustextBox.AppendText("Connected to server" + "\n");
+                    ChattextBox.AppendText("Connected to server" + "\n");
                     STW = new StreamWriter(client.GetStream());
                     STR = new StreamReader(client.GetStream());
                     STW.AutoFlush = true;
                     backgroundWorker1.RunWorkerAsync();
                     backgroundWorker2.WorkerSupportsCancellation = true;
-                    //timerGetStatus.Enabled = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            while(client.Connected)
+            while (client.Connected)
             {
                 try
                 {
                     receive = STR.ReadLine();
-                    this.StatustextBox.Invoke(new MethodInvoker(delegate ()
-                        {
-                            StatustextBox.AppendText("Server:" + receive + "\n");
-                        }));
-                    if (receive.Substring(0, 5) == "PAGER")
+                    this.ChattextBox.Invoke(new MethodInvoker(delegate ()
                     {
-                        //setpagerstatus(receive.Split('.')[0]);
-                        //parsenodes(receive.Split('.')[1]);
-                    }
+                        ChattextBox.AppendText("Server:" + receive + "\n");
+                    }));
                     receive = "";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
@@ -90,9 +79,9 @@ namespace RazorChat
             if (client.Connected)
             {
                 STW.WriteLine(TextToSend);
-                this.StatustextBox.Invoke(new MethodInvoker(delegate ()
+                this.ChattextBox.Invoke(new MethodInvoker(delegate ()
                 {
-                    StatustextBox.AppendText("Client:" + TextToSend + "\n");
+                    ChattextBox.AppendText("Client:" + TextToSend + "\n");
                 }));
             }
             else
@@ -102,77 +91,29 @@ namespace RazorChat
             backgroundWorker2.CancelAsync();
         }
 
-        private void PEnableButton_Click(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
-            TextToSend = "PAGE ENABLE";
+            // The authentication command will be "AUTHINFO username password syspass"
+            TextToSend = "AUTHINFO " + textBoxUsername.Text + " " + textBoxPassword.Text + " " + textBoxSyspass.Text;
             backgroundWorker2.RunWorkerAsync();
         }
 
-        private void PDisableButton_Click(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
-            TextToSend = "PAGE DISABLE";
-            backgroundWorker2.RunWorkerAsync();
-        }
-
-        private void DisconnectButton_Click(object sender, EventArgs e)
-        {
-            timerGetStatus.Enabled = false;
             TextToSend = "QUIT";
             backgroundWorker2.RunWorkerAsync();
             client.Close();
         }
 
-        private void CStatusButton_Click(object sender, EventArgs e)
+        private void TChatButton_Click(object sender, EventArgs e)
         {
-            TextToSend = "CHAT STATUS";
+            TextToSend = "CHAT MESSAGE NODE:1.Test message";
             backgroundWorker2.RunWorkerAsync();
         }
 
-        private void timerGetStatus_Tick(object sender, EventArgs e)
+        private void SChatButton_Click(object sender, EventArgs e)
         {
-            TextToSend = "CHAT STATUS";
-            backgroundWorker2.RunWorkerAsync();
-        }
-
-        private void setpagerstatus(string pagerstring)
-        {
-            if(pagerstring.Split(':')[1]=="ENABLED")
-            {
-                Properties.Settings.Default.PagerEnabled = true;
-                // set visual indicator
-            }
-            else
-            {
-                Properties.Settings.Default.PagerEnabled = false;
-                // set visual indicator
-            }
-        }
-
-        private void parsenodes(string nodestring)
-        {
-            char separator = '.';
-            char nodeseparator = ';';
-            char statseparator = ',';
-
-            string[] tempstring = nodestring.Split(':');
-            string[] nodestrings = tempstring[1].Split(nodeseparator);
-
-            NodeDebug[] status = new NodeDebug[nodestrings.Length];
-            // format: NODES:nodenumber,nodestatusnumber,useron,nodestatusdescription
-            for (int i=0; i<nodestrings.Length; i++)
-            {
-                status[i].nodenumber = nodestrings[i].Split(statseparator)[0];
-                status[i].nodestatusnumber = nodestrings[i].Split(statseparator)[1];
-                status[i].useron = nodestrings[i].Split(statseparator)[2];
-                status[i].nodestatusdescription = nodestrings[i].Split(statseparator)[3];
-                // visual node status
-            }
-        }
-
-        private void LoginButton_Click(object sender, EventArgs e)
-        {
-            // The authentication command will be "AUTHINFO username password syspass"
-            TextToSend = "AUTHINFO " + textBoxUsername.Text + " " + textBoxPassword.Text + " " + textBoxSyspass.Text;
+            TextToSend = "CHAT START NODE:1";
             backgroundWorker2.RunWorkerAsync();
         }
     }

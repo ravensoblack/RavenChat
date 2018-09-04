@@ -34,7 +34,7 @@
             this.toolStripButtonEnablePager = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonStatus = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDebug = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDebugPager = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enablePagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +45,8 @@
             this.toolStripNodes = new System.Windows.Forms.ToolStrip();
             this.backgroundWorkerReceive = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerSend = new System.ComponentModel.BackgroundWorker();
+            this.toolStripButtonDebugChat = new System.Windows.Forms.ToolStripButton();
+            this.debugChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +60,8 @@
             this.toolStripButtonEnablePager,
             this.toolStripButtonSettings,
             this.toolStripButtonStatus,
-            this.toolStripButtonDebug});
+            this.toolStripButtonDebugPager,
+            this.toolStripButtonDebugChat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(284, 39);
@@ -107,16 +110,16 @@
             this.toolStripButtonStatus.Visible = false;
             this.toolStripButtonStatus.Click += new System.EventHandler(this.toolStripButtonStatus_Click);
             // 
-            // toolStripButtonDebug
+            // toolStripButtonDebugPager
             // 
-            this.toolStripButtonDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDebug.Image = global::RazorChat.Properties.Resources.icons8_bug_nolan_50;
-            this.toolStripButtonDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDebug.Name = "toolStripButtonDebug";
-            this.toolStripButtonDebug.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButtonDebug.Text = "Debug Pager";
-            this.toolStripButtonDebug.Visible = false;
-            this.toolStripButtonDebug.Click += new System.EventHandler(this.toolStripButtonDebug_Click);
+            this.toolStripButtonDebugPager.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDebugPager.Image = global::RazorChat.Properties.Resources.icons8_bug_nolan_50;
+            this.toolStripButtonDebugPager.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDebugPager.Name = "toolStripButtonDebugPager";
+            this.toolStripButtonDebugPager.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonDebugPager.Text = "Debug Pager";
+            this.toolStripButtonDebugPager.Visible = false;
+            this.toolStripButtonDebugPager.Click += new System.EventHandler(this.toolStripButtonDebug_Click);
             // 
             // contextMenuStrip1
             // 
@@ -125,9 +128,10 @@
             this.enablePagerToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem,
-            this.debugToolStripMenuItem});
+            this.debugToolStripMenuItem,
+            this.debugChatToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 136);
             // 
             // connectToolStripMenuItem
             // 
@@ -162,7 +166,7 @@
             // 
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Text = "Debug Pager";
             this.debugToolStripMenuItem.Visible = false;
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
@@ -193,6 +197,25 @@
             // 
             this.backgroundWorkerSend.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerSend_DoWork);
             // 
+            // toolStripButtonDebugChat
+            // 
+            this.toolStripButtonDebugChat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDebugChat.Image = global::RazorChat.Properties.Resources.icons8_bug_nolan_50;
+            this.toolStripButtonDebugChat.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDebugChat.Name = "toolStripButtonDebugChat";
+            this.toolStripButtonDebugChat.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonDebugChat.Text = "Debug Chat";
+            this.toolStripButtonDebugChat.Visible = false;
+            this.toolStripButtonDebugChat.Click += new System.EventHandler(this.toolStripButtonDebugChat_Click);
+            // 
+            // debugChatToolStripMenuItem
+            // 
+            this.debugChatToolStripMenuItem.Name = "debugChatToolStripMenuItem";
+            this.debugChatToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.debugChatToolStripMenuItem.Text = "Debug Chat";
+            this.debugChatToolStripMenuItem.Visible = false;
+            this.debugChatToolStripMenuItem.Click += new System.EventHandler(this.debugChatToolStripMenuItem_Click);
+            // 
             // RazorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,7 +243,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonConnect;
         private System.Windows.Forms.ToolStripButton toolStripButtonSettings;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDebug;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDebugPager;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
@@ -233,5 +256,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerReceive;
         private System.ComponentModel.BackgroundWorker backgroundWorkerSend;
         private System.Windows.Forms.ToolStripButton toolStripButtonStatus;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDebugChat;
+        private System.Windows.Forms.ToolStripMenuItem debugChatToolStripMenuItem;
     }
 }
