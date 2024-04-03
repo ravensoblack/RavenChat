@@ -217,6 +217,7 @@
             this.Controls.Add(this.ConnectButton);
             this.Name = "RazorPageDebug";
             this.Text = "RazorPage debug";
+            this.Load += new System.EventHandler(this.RazorPageDebug_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

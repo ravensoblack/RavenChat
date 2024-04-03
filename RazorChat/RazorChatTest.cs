@@ -16,5 +16,10 @@ namespace RazorChat
         {
             InitializeComponent();
         }
+
+        private void RazorChatTest_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

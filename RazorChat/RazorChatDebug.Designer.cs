@@ -198,6 +198,7 @@
             this.Controls.Add(this.ConnectButton);
             this.Name = "RazorChatDebug";
             this.Text = "RazorChat debug";
+            this.Load += new System.EventHandler(this.RazorChatDebug_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

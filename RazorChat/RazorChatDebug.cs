@@ -116,5 +116,10 @@ namespace RazorChat
             TextToSend = "CHAT START NODE:1";
             backgroundWorker2.RunWorkerAsync();
         }
+
+        private void RazorChatDebug_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

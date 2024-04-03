@@ -675,5 +675,10 @@ namespace RazorChat
             RazorChatDebug debugChatForm = new RazorChatDebug();
             debugChatForm.Show();
         }
+
+        private void toolStripNodes_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

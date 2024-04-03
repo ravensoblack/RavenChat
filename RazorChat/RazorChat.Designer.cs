@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(556, 312);
             this.Name = "RazorChat";
             this.Text = "RazorChat";
+            this.Load += new System.EventHandler(this.RazorChat_Load);
             this.ResumeLayout(false);
 
         }

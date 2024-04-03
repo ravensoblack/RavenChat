@@ -175,5 +175,10 @@ namespace RazorChat
             TextToSend = "AUTHINFO " + textBoxUsername.Text + " " + textBoxPassword.Text + " " + textBoxSyspass.Text;
             backgroundWorker2.RunWorkerAsync();
         }
+
+        private void RazorPageDebug_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
