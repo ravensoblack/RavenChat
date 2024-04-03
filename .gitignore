@@ -37,8 +37,8 @@ ehthumbs.db
 Thumbs.db
 *.lnk
 
-*.wav
-*.png
+#*.wav
+#*.png
 RazorChat/obj/Debug/
 .vs/
 RazorChat/publish/
