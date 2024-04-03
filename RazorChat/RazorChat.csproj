@@ -52,7 +52,7 @@
     <ApplicationIcon>Resources\icons8-chatabout-color-50.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>6C8D81B56C0A84BB2543D7482896935216E5961A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FA6E9EA6EBF631D9A81BE376CB4076A2611E5F49</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>RazorChat_TemporaryKey.pfx</ManifestKeyFile>

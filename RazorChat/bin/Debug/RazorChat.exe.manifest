@@ -16,14 +16,14 @@
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
         <!--
           UAC Manifest Options
-          If you want to change the Windows User Account Control level replace the 
+          If you want to change the Windows User Account Control level replace the
           requestedExecutionLevel node with one of the following.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-         If you want to utilize File and Registry Virtualization for backward 
+         If you want to utilize File and Registry Virtualization for backward
          compatibility then delete the requestedExecutionLevel node.
     -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
@@ -43,24 +43,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RazorChat.exe" size="4330424">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RazorChat.exe" size="4329896">
       <assemblyIdentity name="RazorChat" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ogaJB9DN7Gn1ykAIY+AFoWS0IJI+K3ILDRuz7w8LpJA=</dsig:DigestValue>
+        <dsig:DigestValue>nnv5fg3I1lOaKOir6aSgB2fOgSemEqSQO4fhopVB56A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="RazorChat.exe.config" size="3626">
+  <file name="RazorChat.exe.config" size="3611">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9dCFPp4dFWs+3mjbhz/WOeIe858liXQg27AgXhZsl8k=</dsig:DigestValue>
+      <dsig:DigestValue>7pCK89RfmsmHLw9PExhEk+SnjIRzjHQOjlSg+zCXx9M=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\icons8-chatabout-color-50.ico" size="10462">
