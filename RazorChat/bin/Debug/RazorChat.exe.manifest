@@ -50,17 +50,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>KalZ3+82W9L1vcQnZ6uQYLWooTr9gAcYgrih8AOFAGc=</dsig:DigestValue>
+        <dsig:DigestValue>oKrDx1D5IOlVeViFBuZaB+xRGwCelK23eOv8RJ3bzHU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="RazorChat.exe.config" size="3611">
+  <file name="RazorChat.exe.config" size="3617">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>7pCK89RfmsmHLw9PExhEk+SnjIRzjHQOjlSg+zCXx9M=</dsig:DigestValue>
+      <dsig:DigestValue>h6WtkbBV8RT3XlvOJla5/ZGwKDgUC8E5nf657hX5rk0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\icons8-chatabout-color-50.ico" size="10462">

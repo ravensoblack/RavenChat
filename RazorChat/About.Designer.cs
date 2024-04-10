@@ -41,7 +41,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 106);
+            this.label1.Location = new System.Drawing.Point(74, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 13);
             this.label1.TabIndex = 0;
@@ -50,7 +50,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(170, 106);
+            this.linkLabel1.Location = new System.Drawing.Point(183, 106);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(39, 13);
             this.linkLabel1.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(99, 133);
+            this.buttonOK.Location = new System.Drawing.Point(112, 133);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 2;
@@ -73,14 +73,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(19, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 13);
+            this.label2.Size = new System.Drawing.Size(175, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "From Razor of The Silent Strike:";
+            this.label2.Text = "From Ravne of Raven of the Storm:";
             // 
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(218, 86);
+            this.linkLabel2.Location = new System.Drawing.Point(237, 86);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(44, 13);
             this.linkLabel2.TabIndex = 4;
@@ -93,14 +93,14 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 13);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(254, 13);
+            this.label3.Size = new System.Drawing.Size(258, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "RazorPage, remote sysop pager for Synchronet BBS";
+            this.label3.Text = "RavenPage, remote sysop pager for Synchronet BBS";
             // 
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(173, 86);
+            this.linkLabel3.Location = new System.Drawing.Point(192, 86);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(46, 13);
             this.linkLabel3.TabIndex = 6;
@@ -121,7 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 183);
+            this.ClientSize = new System.Drawing.Size(306, 183);
             this.Controls.Add(this.labelAboutVersion);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.label3);

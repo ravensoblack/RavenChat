@@ -34,12 +34,12 @@ namespace RazorChat
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto:razordead@gmail.com");
+            System.Diagnostics.Process.Start("mailto:ravensoblack@gmail.com");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://thesilentstrike.com");
+            System.Diagnostics.Process.Start("https://darkseekers.com");
         }
     }
 }
